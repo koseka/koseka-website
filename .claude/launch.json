@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "koseka-website",
+      "runtimeExecutable": "trunk",
+      "runtimeArgs": ["serve"],
+      "cwd": "client",
+      "port": 8080
+    }
+  ]
+}

@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .pulse-border {
+    @apply border-[0.5px] border-slate-500/40 group-hover:border-slate-500 peer-focus:border-slate-500 bg-transparent transition-colors duration-[1s] ease-out group-hover:animate-pulse-strong peer-focus:animate-pulse-strong;
+  }
+  .view-icon {
+    @apply select-none w-6 h-6 opacity-90;
+  }
+  .view-title {
+    @apply select-none font-koseka font-[350] text-xl antialiased underline decoration-[1.5px] underline-offset-[3px] text-slate-300/90 decoration-slate-300/0 group-hover:decoration-slate-300/90 transition-colors duration-[250ms] ease-out;
+  }
+  .view-frame {
+    @apply fixed -z-20 peer-hover:-z-10 peer-focus:-z-10 inset-0 opacity-0 peer-hover:opacity-100 peer-focus:opacity-100 transition-opacity;
+  }
+}

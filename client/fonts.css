@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Koseka */
+@font-face {
+  font-family: Koseka;
+  font-style: normal;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("assets/fonts/koseka-roman.woff2") format("woff2");
+}
+@font-face {
+  font-family: Koseka;
+  font-style: oblique;
+  font-weight: 200 700;
+  font-display: swap;
+  src: url("assets/fonts/koseka-oblique.woff2") format("woff2");
+}
+
+/* Tiempos Text */
+@font-face {
+  font-family: Tiempos;
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/tiempos-regular-roman.woff2") format("woff2");
+}
+@font-face {
+  font-family: Tiempos;
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("assets/fonts/tiempos-regular-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: Tiempos;
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/tiempos-medium-roman.woff2") format("woff2");
+}
+@font-face {
+  font-family: Tiempos;
+  font-style: italic;
+  font-weight: 500;
+  font-display: swap;
+  src: url("assets/fonts/tiempos-medium-italic.woff2") format("woff2");
+}
+
+/*
+.menu {
+  will-change: z-index, scroll-position;
+}
+*/
