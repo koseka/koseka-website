@@ -1,0 +1,14 @@
+[build]
+target = "index.html"
+
+[serve]
+addresses = ["0.0.0.0"]     # Serves on all interfaces (0.0.0.0) instead of just localhost.
+port = 8080
+open = false                # Opens a browser tab once the initial build is complete.
+no_autoreload = false       # Disables auto-reload of the web app.
+no_error_reporting = false  # Disables error reporting.
+ws_protocol = "ws"          # Protocol used for autoreload WebSockets connection.
+
+[watch]
+watch = ["src", "index.html", "styles.css", "tailwind.config.js", "Trunk.toml"]
+ignore = ["dist", "target"]
