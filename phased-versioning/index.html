@@ -1,0 +1,586 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<meta
+			name="description"
+			content="Phased Versioning — a versioning system with named phases and a Git-native distribution model. A standalone specification by Koseka."
+		/>
+		<link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+		<title>Phased Versioning</title>
+		<style>
+			@font-face {
+				font-family: Koseka;
+				font-style: normal;
+				font-weight: 200 700;
+				font-display: swap;
+				src: url("assets/fonts/koseka-roman.woff2") format("woff2");
+			}
+			@font-face {
+				font-family: Koseka;
+				font-style: oblique;
+				font-weight: 200 700;
+				font-display: swap;
+				src: url("assets/fonts/koseka-oblique.woff2") format("woff2");
+			}
+			@font-face {
+				font-family: Tiempos;
+				font-style: normal;
+				font-weight: 400;
+				font-display: swap;
+				src: url("assets/fonts/tiempos-regular-roman.woff2") format("woff2");
+			}
+			@font-face {
+				font-family: Tiempos;
+				font-style: italic;
+				font-weight: 400;
+				font-display: swap;
+				src: url("assets/fonts/tiempos-regular-italic.woff2") format("woff2");
+			}
+			@font-face {
+				font-family: Tiempos;
+				font-style: normal;
+				font-weight: 500;
+				font-display: swap;
+				src: url("assets/fonts/tiempos-medium-roman.woff2") format("woff2");
+			}
+
+			:root {
+				--bg: #0f172a;
+				--surface: #1e293b80;
+				--border: #64748bcc;
+				--border-soft: #64748b4d;
+				--text: #cbd5e1e6;
+				--text-strong: #e2e8f0;
+				--text-soft: #94a3b8;
+				--accent: #a5b4fc;
+				--mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			html {
+				scroll-behavior: smooth;
+			}
+
+			body {
+				background: var(--bg);
+				color: var(--text);
+				font-family: Tiempos, Georgia, serif;
+				font-size: 1.0625rem;
+				line-height: 1.75;
+				-webkit-font-smoothing: antialiased;
+			}
+
+			header {
+				position: sticky;
+				top: 0;
+				z-index: 10;
+				backdrop-filter: blur(6px);
+				background: #0f172acc;
+				border-bottom: 0.5px solid var(--border-soft);
+			}
+			.header-inner {
+				max-width: 46rem;
+				margin: 0 auto;
+				padding: 0.85rem 1.5rem;
+				display: flex;
+				justify-content: space-between;
+				align-items: baseline;
+				gap: 1rem;
+			}
+			.header-inner .name {
+				font-family: Koseka, system-ui, sans-serif;
+				font-weight: 350;
+				font-size: 1.05rem;
+				color: var(--text-strong);
+				text-decoration: none;
+				white-space: nowrap;
+			}
+			.header-inner .by {
+				font-family: Koseka, system-ui, sans-serif;
+				font-weight: 200;
+				font-size: 0.95rem;
+				color: var(--text-soft);
+				text-decoration: none;
+				white-space: nowrap;
+			}
+			.header-inner .by:hover {
+				color: var(--text-strong);
+			}
+
+			main {
+				max-width: 46rem;
+				margin: 0 auto;
+				padding: 3.5rem 1.5rem 5rem;
+			}
+
+			h1 {
+				font-family: Koseka, system-ui, sans-serif;
+				font-weight: 350;
+				font-size: 2.6rem;
+				line-height: 1.15;
+				color: var(--text-strong);
+				margin-bottom: 1rem;
+			}
+			.lede {
+				color: var(--text);
+				margin-bottom: 1.1rem;
+			}
+			.adherence {
+				border-left: 2px solid var(--accent);
+				padding: 0.15rem 0 0.15rem 1.1rem;
+				color: var(--text-soft);
+				font-style: italic;
+				margin: 1.6rem 0 2.6rem;
+			}
+
+			h2 {
+				font-family: Koseka, system-ui, sans-serif;
+				font-weight: 350;
+				font-size: 1.55rem;
+				color: var(--text-strong);
+				margin: 3rem 0 0.9rem;
+				scroll-margin-top: 4.5rem;
+			}
+			h2 a {
+				color: inherit;
+				text-decoration: none;
+			}
+			h2 a:hover::after {
+				content: " #";
+				color: var(--text-soft);
+				font-weight: 200;
+			}
+
+			p {
+				margin-bottom: 1.1rem;
+			}
+			em {
+				font-style: italic;
+			}
+			strong {
+				font-weight: 500;
+				color: var(--text-strong);
+			}
+
+			a {
+				color: var(--accent);
+				text-decoration: underline;
+				text-decoration-thickness: 1px;
+				text-underline-offset: 3px;
+				text-decoration-color: #a5b4fc66;
+			}
+			a:hover {
+				text-decoration-color: var(--accent);
+			}
+
+			code {
+				font-family: var(--mono);
+				font-size: 0.86em;
+				background: var(--surface);
+				border: 0.5px solid var(--border-soft);
+				border-radius: 0.375rem;
+				padding: 0.1em 0.4em;
+				color: var(--text-strong);
+			}
+			pre {
+				background: var(--surface);
+				border: 0.5px solid var(--border-soft);
+				border-radius: 1rem;
+				padding: 1.1rem 1.3rem;
+				overflow-x: auto;
+				margin: 1.4rem 0;
+				line-height: 1.6;
+			}
+			pre code {
+				background: none;
+				border: none;
+				padding: 0;
+				font-size: 0.85rem;
+				color: var(--text);
+			}
+
+			ol,
+			ul {
+				margin: 0 0 1.1rem 1.4rem;
+			}
+			li {
+				margin-bottom: 0.55rem;
+			}
+			li::marker {
+				color: var(--text-soft);
+			}
+
+			.toc {
+				background: var(--surface);
+				border: 0.5px solid var(--border-soft);
+				border-radius: 1rem;
+				padding: 1.3rem 1.6rem;
+				margin: 0 0 1rem;
+			}
+			.toc-title {
+				font-family: Koseka, system-ui, sans-serif;
+				font-weight: 350;
+				font-size: 1rem;
+				color: var(--text-strong);
+				margin-bottom: 0.6rem;
+			}
+			.toc ol {
+				margin: 0 0 0 1.3rem;
+			}
+			.toc li {
+				margin-bottom: 0.15rem;
+			}
+			.toc a {
+				color: var(--text);
+				text-decoration: none;
+			}
+			.toc a:hover {
+				color: var(--text-strong);
+				text-decoration: underline;
+				text-decoration-color: var(--border);
+			}
+
+			footer {
+				border-top: 0.5px solid var(--border-soft);
+				margin-top: 4rem;
+				padding-top: 1.6rem;
+				font-family: Koseka, system-ui, sans-serif;
+				font-weight: 200;
+				font-size: 0.9rem;
+				color: var(--text-soft);
+			}
+			footer a {
+				color: var(--text-soft);
+			}
+			footer a:hover {
+				color: var(--text-strong);
+			}
+
+			@media (max-width: 480px) {
+				h1 {
+					font-size: 2.1rem;
+				}
+				body {
+					font-size: 1rem;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<div class="header-inner">
+				<a class="name" href="#">Phased Versioning</a>
+				<a class="by" href="https://koseka.net">a Koseka standard</a>
+			</div>
+		</header>
+
+		<main>
+			<h1>Phased Versioning</h1>
+
+			<p class="lede">
+				Phased Versioning is a versioning system — a standalone specification, the way Semantic Versioning has its own official
+				document. It defines how software is versioned, how versions map onto Git, and what that implies for commits,
+				changelogs, and contribution files.
+			</p>
+
+			<p class="adherence">
+				Projects that follow it state: "This project uses <a href="https://phased-versioning.koseka.net">Phased Versioning</a>."
+			</p>
+
+			<nav class="toc">
+				<div class="toc-title">Contents</div>
+				<ol>
+					<li><a href="#summary">Summary</a></li>
+					<li><a href="#motivation">Motivation</a></li>
+					<li><a href="#specification">Specification</a></li>
+					<li><a href="#phase-names">Phase names</a></li>
+					<li><a href="#writing-versions">Writing versions</a></li>
+					<li><a href="#branches">Branches</a></li>
+					<li><a href="#commits">Commits</a></li>
+					<li><a href="#changelog">Changelog</a></li>
+					<li><a href="#contributing-files">Contributing files</a></li>
+					<li><a href="#tooling">Tooling</a></li>
+					<li><a href="#coexisting-with-semver">Coexisting with SemVer</a></li>
+				</ol>
+			</nav>
+
+			<h2 id="summary"><a href="#summary">Summary</a></h2>
+
+			<p>A <strong>full version</strong> has the form:</p>
+
+			<pre><code>vN-phase.i</code></pre>
+
+			<p>
+				where <code>N</code> is the <strong>generation</strong> number, starting at 1 (<code>vN</code> alone is the
+				<strong>base version</strong>), <code>phase</code> is the phase name, and <code>i</code> is the
+				<strong>revision</strong> number. Given a full version: increment the <strong>generation</strong> when you make breaking
+				changes, open a new <strong>phase</strong> when backward-compatible functionality significant enough to deserve
+				recognition has accumulated, and increment the <strong>revision</strong> for all other backward-compatible changes —
+				fixes, improvements, and small features included.
+			</p>
+
+			<p>Example timeline: <code>v1-alameda.0 → v1-bravo.29 → v1-cyrus.5 → v2-atlas.0 → …</code></p>
+
+			<h2 id="motivation"><a href="#motivation">Motivation</a></h2>
+
+			<p>
+				Phased Versioning is best understood as Semantic Versioning with the MINOR replaced by a <strong>named</strong> phase,
+				and a Git-native distribution model. A versioning system must speak to machines <em>and</em> humans, and humans are not
+				good with numbers: subjectively, the jump from 7 to 8 feels bigger than the jump from 29 to 30, even though
+				programmatically each step is one feature release. Named phases fix this — going from <code>alameda</code> to
+				<code>bravo</code> communicates a real, memorable step in a way that going from 13 to 14 never does — while machines
+				still get a strictly ordered sequence.
+			</p>
+
+			<p>Deliberate differences from Semantic Versioning:</p>
+
+			<ul>
+				<li>
+					<strong>No pre-releases.</strong> There is no <code>-rc.1</code>/<code>-beta.2</code> machinery; stability is
+					communicated by branches (see <a href="#branches">Branches</a>).
+				</li>
+				<li>
+					<strong>No version zero.</strong> SemVer allows breaking changes on minor bumps while the major is 0, which is
+					inconsistent — a special-cased zero where the rules don't apply. Phased Versioning resolves this by not having a
+					<code>v0</code> at all: generations start at <code>v1</code>, and every version branch obeys the same stability rules.
+					The zeroth generation exists only <em>conceptually</em>, as the <code>dev</code> branch: a repository with no version
+					branch yet is effectively at generation zero — unreleased, free to change, and never tagged. Once anything deserves
+					the name "release", it is <code>v1</code> and it is stable.
+				</li>
+			</ul>
+
+			<h2 id="specification"><a href="#specification">Specification</a></h2>
+
+			<ol>
+				<li>
+					Software using Phased Versioning is distributed <strong>as a Git repository, by branch</strong> — the branch is the
+					version selector, not a package registry entry.
+				</li>
+				<li>
+					Each generation <code>vN</code> is a <strong>version branch</strong>. Full versions are <strong>tags</strong> on that
+					branch, with at most one release tag per commit.
+				</li>
+				<li>
+					<strong>Breaking changes</strong> are any modification to a software component — whether syntactic, semantic, or
+					environmental — that requires the consumers of that component (be they other programs, developers, or automated
+					scripts) to fundamentally alter their usage, code, or environment to restore previous functionality. Fixing bugs,
+					adding features, and refactoring can all potentially introduce breaks — or none at all; a change is judged by its
+					effect on consumers, not by its intent.
+				</li>
+				<li>
+					<strong>A version branch must never receive breaking changes.</strong> Importing any <code>vN</code> branch therefore
+					guarantees stability of the contract: fixes and features may arrive, breaks never do. Breaking changes live only on
+					the <code>dev</code> branch.
+				</li>
+				<li>
+					A new <strong>phase</strong> (<code>vN-phase.0</code>) is opened when the developer judges that backward-compatible
+					functionality significant enough to deserve recognition has accumulated. Phases are a communication device — they tell
+					the audience <em>"here's something worth looking at."</em>
+				</li>
+				<li>
+					A <strong>revision</strong> bump (<code>vN-phase.i+1</code>) is made for backward-compatible changes that do not
+					warrant a phase: fixes, improvements, and small features. Whether a feature warrants a phase is the developer's
+					judgment, not a mechanical rule.
+				</li>
+				<li>
+					A new <strong>generation</strong> (branch <code>vN+1</code>) is cut when breaking changes accumulated on
+					<code>dev</code> are ready to ship.
+				</li>
+			</ol>
+
+			<h2 id="phase-names"><a href="#phase-names">Phase names</a></h2>
+
+			<p>
+				Phase names are arbitrary lowercase words (<code>[a-z]</code> only) that follow
+				<strong>looped alphabetic progression</strong>: the first phase of a generation starts with <code>a</code>, each
+				subsequent phase's first letter is the next letter of the alphabet, and after <code>z</code> the loop wraps back to
+				<code>a</code>. So <code>alameda → bravo → cyrus</code> is a valid progression, and — perhaps surprisingly — the classic
+				<code>alpha → beta → gamma</code> is not (<code>b → g</code> is an illegal jump). Phase names carry no fixed semantics:
+				they are ordered, human-memorable checkpoints, and what actually changed is told by the commits and the changelog.
+			</p>
+
+			<h2 id="writing-versions"><a href="#writing-versions">Writing versions</a></h2>
+
+			<p>
+				A version is always written with a lowercase <code>v</code> — in code, prose, headings, and even at the start of a
+				sentence. There are exactly three valid ways to write a version, differing only in how much of the full form is kept:
+			</p>
+
+			<ol>
+				<li>
+					<strong>Full version</strong> — <code>vN-phase.i</code> (e.g. <code>v1-cyrus.5</code>): generation, phase name, and
+					revision.
+				</li>
+				<li>
+					<strong>Phase version</strong> — <code>vN-phase</code> (e.g. <code>v1-cyrus</code>): the revision is dropped; refers
+					to a phase as a whole.
+				</li>
+				<li>
+					<strong>Base version</strong> — <code>vN</code> (e.g. <code>v1</code>): only the generation; refers to a generation as
+					a whole.
+				</li>
+			</ol>
+
+			<p>
+				The two short forms are legal abbreviations of a project's actual version for when the finer detail is irrelevant.
+				Anything else is invalid — a capital <code>V</code>, a SemVer-style <code>v1.0</code>, a phase name without its
+				generation, or a bare revision.
+			</p>
+
+			<h2 id="branches"><a href="#branches">Branches</a></h2>
+
+			<ul>
+				<li>
+					<strong><code>dev</code> is the main branch.</strong> It is the most up-to-date branch, the only branch where breaking
+					changes are allowed, and what you import when you want the nightly version. It is never tagged.
+				</li>
+				<li>
+					<strong>Version branches are stable by construction</strong> (rule 4). The first version branch a repository ever cuts
+					is <code>v1</code>; until it exists, <code>dev</code> plays the role of the zeroth generation — unreleased and free to
+					change.
+				</li>
+			</ul>
+
+			<p>
+				The flow: all work lands on <code>dev</code>. As long as <code>dev</code> has accumulated no breaking changes, it is
+				regularly merged into the most recent version branch, where phases and revisions are tagged. Once a breaking change is
+				committed on <code>dev</code>, the current generation is closed to new features, and the next merge from
+				<code>dev</code> cuts a <strong>new</strong> version branch instead.
+			</p>
+
+			<p>
+				<strong>Maintain at most two branches</strong>: <code>dev</code> and the most recent version branch. Older generations
+				may occasionally receive a patch, but effort concentrates on the newest generation.
+			</p>
+
+			<p>
+				Every repository's README documents its branches in a table (branch name + description), so stability is readable at a
+				glance — and enforced by which branch you import.
+			</p>
+
+			<h2 id="commits"><a href="#commits">Commits</a></h2>
+
+			<p>
+				Phased Versioning does not define its own commit format: projects use
+				<a href="https://www.conventionalcommits.org/en/v1.0.0/">Conventional Commits</a> (<code>type(scope): description</code
+				>, with <code>!</code> or a <code>BREAKING CHANGE:</code> footer marking breaking changes). AI models and tooling know
+				it natively, and it carries exactly the impact signal the versioning rules need.
+			</p>
+
+			<p>
+				Every commit carries a typed prefix — merges included, for consistency: merging the development branch into a version
+				branch is written as <code>merge: `dev` -&gt; `v1`</code> (and <code>merge!:</code> would mark a breaking merge, which
+				rule 1 below forbids on version branches anyway).
+			</p>
+
+			<p>
+				Two hard rules connect commits to the versioning system, and both are mechanically verifiable by tools and AI models:
+			</p>
+
+			<ol>
+				<li>
+					<strong>Breaking commits (<code>!</code> or <code>BREAKING CHANGE:</code>) may only exist on <code>dev</code></strong>
+					(they are breaking; version branches never break).
+				</li>
+				<li>Full-version tags live on version branches only; <code>dev</code> is never tagged.</li>
+			</ol>
+
+			<p>
+				Everything else is judgment, not mechanics: <code>feat</code> commits may ship in either bump type. Small features can
+				land in revision bumps; a new phase is opened when the accumulated features are significant enough to deserve
+				recognition (see rule 5 of the <a href="#specification">Specification</a>). Phased Versioning is deliberately not a
+				one-to-one projection of Semantic Versioning here — the phase is a communication device for humans, not an automatic
+				consequence of a <code>feat</code> in the history.
+			</p>
+
+			<h2 id="changelog"><a href="#changelog">Changelog</a></h2>
+
+			<p>
+				Every project keeps a <code>CHANGELOG.md</code>: an adherence/license preamble, then entries newest first, one per full
+				version, with the version and release date as the heading and a short bulleted list of user-facing changes.
+			</p>
+
+			<pre><code># Changelog
+
+This project is licensed under the [Apache License (Version 2.0)](LICENSE). The format of this file
+(and the project as a whole) follows [Phased Versioning](https://phased-versioning.koseka.net).
+
+## v1-alpha.1 (2026-02-26)
+
+- Refined the progress indicators.
+- Added a `-v/--version` flag to the CLI.
+
+## v1-alpha.0 (2026-02-21)
+
+First stable version.</code></pre>
+
+			<p>
+				A project with no releases yet states so in place of entries:
+				<em>"This project has no official stable releases yet."</em>
+			</p>
+
+			<h2 id="contributing-files"><a href="#contributing-files">Contributing files</a></h2>
+
+			<p>Contributions are of two kinds, and every repository's <code>CONTRIBUTING.md</code> reflects this:</p>
+
+			<ul>
+				<li>
+					<strong>High-level contributions</strong> do not change the codebase: reporting issues, requesting features,
+					discussing ideas and proposing solutions (GitHub <em>issues</em>, <em>discussions</em>, <em>security</em>; also
+					Discord/Slack and other channels).
+				</li>
+				<li>
+					<strong>Low-level contributions</strong> affect the codebase directly: solving issues, implementing features,
+					optimizing code, improving tests or documentation (GitHub <em>pull requests</em>).
+				</li>
+			</ul>
+
+			<p>
+				A low-level contribution must always be associated with a high-level contribution: propose the feature or report the bug
+				first, gather feedback, then implement.
+			</p>
+
+			<h2 id="tooling"><a href="#tooling">Tooling</a></h2>
+
+			<p>
+				The <a href="https://github.com/AmonRayfa/oyo"><code>oyo</code> CLI</a> automates Phased Versioning in Git repositories
+				with three commands: <code>oyo gen</code> creates the next version branch, <code>oyo phase &lt;name&gt;</code> opens a
+				new phase (enforcing looped alphabetic progression and resetting the revision to 0), and <code>oyo rev</code> bumps the
+				revision — each phase/revision producing a full-version tag on the latest commit.
+			</p>
+
+			<h2 id="coexisting-with-semver"><a href="#coexisting-with-semver">Coexisting with SemVer</a></h2>
+
+			<p>
+				For ecosystems that force Semantic Versioning, the mapping is direct: MAJOR = generation number, MINOR = the phase's
+				ordinal within its generation (first phase = 0), PATCH = revision. For example, <code>v1-cyrus.5</code> (cyrus being the
+				third phase of <code>v1</code>) maps to <code>1.2.5</code>. The ordinal is a cumulative counter,
+				<strong>not</strong> the alphabet index of the phase name's first letter: it increments by one for every phase opened
+				and keeps counting through the z→a wrap of the looped alphabetic progression, so the phase after a 26th phase (MINOR 25)
+				starting with <code>z</code> gets MINOR 26, not 0.
+			</p>
+
+			<p>
+				A repository that only has a <code>dev</code> branch — no version branch cut yet — projects to <code>0.0.0</code>, and
+				stays at <code>0.0.0</code> until the first version branch (<code>v1</code>) exists; from then on, the projection of the
+				latest full version applies. Since generations start at 1, every released version projects to a MAJOR of at least 1:
+				under this mapping, a SemVer major of 0 always means "not a release" — the entire <code>0.x</code> namespace belongs to
+				the conceptual zeroth generation, <code>dev</code>.
+			</p>
+
+			<p>
+				Note one deliberate divergence from strict SemVer semantics: since small features may ship in revision bumps, a
+				projected PATCH can occasionally contain minor features. Prefer publishing on platforms that do not enforce SemVer (like
+				GitHub, via branches and tags) whenever possible.
+			</p>
+
+			<footer>Phased Versioning is a <a href="https://koseka.net">Koseka</a> standard. © 2026 Koseka.</footer>
+		</main>
+	</body>
+</html>
