@@ -276,7 +276,7 @@
 		<header>
 			<div class="header-inner">
 				<a class="name" href="#">Phased Versioning</a>
-				<a class="by" href="https://koseka.net">a Koseka standard</a>
+				<a class="by" href="https://koseka.net">koseka.net</a>
 			</div>
 		</header>
 
@@ -285,8 +285,8 @@
 
 			<p class="lede">
 				Phased Versioning is a versioning system — a standalone specification, the way Semantic Versioning has its own official
-				document. It defines how software is versioned, how versions map onto Git, and what that implies for commits,
-				changelogs, and contribution files.
+				document. It defines how software is versioned, how versions map onto Git, and what that implies for commits and
+				changelogs.
 			</p>
 
 			<p class="adherence">
@@ -304,7 +304,6 @@
 					<li><a href="#branches">Branches</a></li>
 					<li><a href="#commits">Commits</a></li>
 					<li><a href="#changelog">Changelog</a></li>
-					<li><a href="#contributing-files">Contributing files</a></li>
 					<li><a href="#tooling">Tooling</a></li>
 					<li><a href="#coexisting-with-semver">Coexisting with SemVer</a></li>
 				</ol>
@@ -393,6 +392,14 @@
 					<code>dev</code> are ready to ship.
 				</li>
 			</ol>
+
+			<p>
+				Distribution by Git branch (rule 1) is the convention, not a prerequisite. Phased Versioning can version anything — a
+				library, an application, an AI model — and a project may distribute however it likes (installers, package registries,
+				GitHub releases, downloadable weights), as long as the published versions follow the format and the stability rules.
+				When distribution happens through releases rather than branch imports, each release simply carries a full version as its
+				name; the branch and tag rules still govern the repository itself.
+			</p>
 
 			<h2 id="phase-names"><a href="#phase-names">Phase names</a></h2>
 
@@ -523,27 +530,6 @@ First stable version.</code></pre>
 			<p>
 				A project with no releases yet states so in place of entries:
 				<em>"This project has no official stable releases yet."</em>
-			</p>
-
-			<h2 id="contributing-files"><a href="#contributing-files">Contributing files</a></h2>
-
-			<p>Contributions are of two kinds, and every repository's <code>CONTRIBUTING.md</code> reflects this:</p>
-
-			<ul>
-				<li>
-					<strong>High-level contributions</strong> do not change the codebase: reporting issues, requesting features,
-					discussing ideas and proposing solutions (GitHub <em>issues</em>, <em>discussions</em>, <em>security</em>; also
-					Discord/Slack and other channels).
-				</li>
-				<li>
-					<strong>Low-level contributions</strong> affect the codebase directly: solving issues, implementing features,
-					optimizing code, improving tests or documentation (GitHub <em>pull requests</em>).
-				</li>
-			</ul>
-
-			<p>
-				A low-level contribution must always be associated with a high-level contribution: propose the feature or report the bug
-				first, gather feedback, then implement.
 			</p>
 
 			<h2 id="tooling"><a href="#tooling">Tooling</a></h2>
