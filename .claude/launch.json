@@ -1,12 +1,19 @@
 {
-  "version": "0.0.1",
-  "configurations": [
-    {
-      "name": "koseka-website",
-      "runtimeExecutable": "trunk",
-      "runtimeArgs": ["serve"],
-      "cwd": "client",
-      "port": 8080
-    }
-  ]
+	"version": "0.0.1",
+	"configurations": [
+		{
+			"name": "koseka-website",
+			"runtimeExecutable": "trunk",
+			"runtimeArgs": ["serve"],
+			"cwd": "client",
+			"port": 8080
+		},
+		{
+			"name": "phased-versioning",
+			"runtimeExecutable": "python3",
+			"runtimeArgs": ["-m", "http.server", "8090"],
+			"cwd": "phased-versioning",
+			"port": 8090
+		}
+	]
 }
