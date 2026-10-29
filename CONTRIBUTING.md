@@ -17,14 +17,14 @@ Here are the main directories and files in the project:
 │   ├── index.html
 │   ├── Trunk.toml
 │   └── Cargo.toml
-├── server/
-│   ├── src/
-│   └── Cargo.toml
+├── phased-versioning/
+│   ├── assets/
+│   └── index.html
 ├── img/
 └── package.json
 ```
 
-The `client/` directory contains the [Sycamore](https://sycamore.dev) web app, compiled to WebAssembly by the Trunk WASM bundler and styled with [Tailwind CSS](https://tailwindcss.com). Its `client/assets/` subdirectory holds the curated assets that ship with the site, while the top-level `assets/` directory is the raw asset library. The `server/` directory contains the Rust server that hosts the built site, and `img/` holds the graphics used by the README.
+The `client/` directory contains the [Sycamore](https://sycamore.dev) web app, compiled to WebAssembly by the Trunk WASM bundler and styled with [Tailwind CSS](https://tailwindcss.com). Its `client/assets/` subdirectory holds the curated assets that ship with the site, while the top-level `assets/` directory is the raw asset library. The `phased-versioning/` directory is the static [Phased Versioning](https://phased-versioning.koseka.net) specification page, `assets/logo/` holds the logo and the Koseka Sans construction, and `img/` holds the graphics used by the README.
 
 Additionally, the `package.json` file configures the [Node](https://nodejs.org) environment required to run the [Trunk Code Quality CLI](https://docs.trunk.io/code-quality/overview) metalinter.
 
@@ -53,7 +53,7 @@ If you are using [**Zed**](https://zed.dev), you can locally disable the _format
 
 ```json
 {
-  "format_on_save": "off"
+	"format_on_save": "off"
 }
 ```
 
@@ -61,7 +61,7 @@ If you are using [**VSCode**](https://code.visualstudio.com), you can locally di
 
 ```json
 {
-  "editor.formatOnSave": false
+	"editor.formatOnSave": false
 }
 ```
 
@@ -103,12 +103,7 @@ trunk build                                                 # Builds the client 
 trunk build --release                                       # Builds the client into `client/dist/` in release mode.
 ```
 
-You can build and run the server using the following commands (run from the `server/` directory):
-
-```sh
-cargo run                                                   # Builds and runs the server in debug mode.
-cargo build --release                                       # Builds the server in release mode.
-```
+Both sites deploy to Cloudflare Pages as static files (`client/dist/` and `phased-versioning/`).
 
 ## License
 

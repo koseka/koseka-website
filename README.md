@@ -19,7 +19,7 @@
 
 ---
 
-The source of [koseka.net](https://koseka.net), the website of **Koseka**. The client is a [Sycamore](https://sycamore.dev) web app compiled to WebAssembly and styled with [Tailwind CSS](https://tailwindcss.com), and the server is written in Rust as well. The site currently shows a teaser page: we are cooking.
+The source of [koseka.net](https://koseka.net), the website of **Koseka**. The client is a [Sycamore](https://sycamore.dev) web app compiled to WebAssembly and styled with [Tailwind CSS](https://tailwindcss.com), deployed as a static site on Cloudflare Pages. The site currently shows a teaser page: we are cooking. The [Phased Versioning](https://phased-versioning.koseka.net) specification page lives in `phased-versioning/`, and the logo, wordmark, and typeface sources in `assets/logo/`.
 
 <h2><img height="20" alt="branches" src="./img/branches.svg">&nbsp;&nbsp;Branches</h2>
 
@@ -49,7 +49,7 @@ cd client && trunk serve                                    # Builds and serves 
 
 <h2><img height="20" alt="usage" src="./img/usage.svg">&nbsp;&nbsp;Structure</h2>
 
-The `client/` directory contains the Sycamore web app, and the `server/` directory contains the Rust server that hosts the built site. The `assets/` directory is the raw asset library; the curated assets that actually ship with the site live in `client/assets/`.
+The `client/` directory contains the Sycamore web app; `phased-versioning/` is the static specification page; `assets/logo/` holds the logo, wordmark, lockups, and the Koseka Sans construction. The curated assets that actually ship with the site live in `client/assets/` and `phased-versioning/assets/`.
 
 <h2><img height="20" alt="security" src="./img/security.svg">&nbsp;&nbsp;Security</h2>
 
