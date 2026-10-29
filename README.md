@@ -19,7 +19,7 @@
 
 ---
 
-The source of [koseka.net](https://koseka.net), the website of **Koseka**. The client is a [Sycamore](https://sycamore.dev) web app compiled to WebAssembly and styled with [Tailwind CSS](https://tailwindcss.com), deployed as a static site on Cloudflare Pages. The site currently shows a teaser page: we are cooking. The [Phased Versioning](https://phased-versioning.koseka.net) specification page lives in `phased-versioning/`, and the logo, wordmark, and typeface sources in `assets/logo/`.
+The source of [koseka.net](https://koseka.net), the website of **Koseka**. The client is a [Sycamore](https://sycamore.dev) web app compiled to WebAssembly and styled with [Tailwind CSS](https://tailwindcss.com), deployed as a static site on Cloudflare Pages. The site currently shows a teaser page: we're cooking. The [Phased Versioning](https://phased-versioning.koseka.net) specification page lives in `phased-versioning/`. The logo and the Koseka Sans typeface are Koseka's brand assets: their sources live in a private repository, and only what the site needs to render ships here — see the [NOTICE](NOTICE) for what the license does and does not cover.
 
 <h2><img height="20" alt="branches" src="./img/branches.svg">&nbsp;&nbsp;Branches</h2>
 
@@ -49,7 +49,7 @@ cd client && trunk serve                                    # Builds and serves 
 
 <h2><img height="20" alt="usage" src="./img/usage.svg">&nbsp;&nbsp;Structure</h2>
 
-The `client/` directory contains the Sycamore web app; `phased-versioning/` is the static specification page; `assets/logo/` holds the logo, wordmark, lockups, and the Koseka Sans construction. The curated assets that actually ship with the site live in `client/assets/` and `phased-versioning/assets/`.
+The `client/` directory contains the Sycamore web app and `phased-versioning/` the static specification page; each ships its own assets under `assets/` (the fonts, the logo mark, the favicon).
 
 <h2><img height="20" alt="security" src="./img/security.svg">&nbsp;&nbsp;Security</h2>
 
@@ -67,4 +67,4 @@ Unless you explicitly state otherwise, any contribution intentionally submitted 
 
 Copyright 2026 Amon Rayfa.
 
-This project is licensed under the [Apache License (Version 2.0)](LICENSE).
+This project is licensed under the [Apache License (Version 2.0)](LICENSE), **except the brand assets**: the Koseka name, logo mark, wordmark and the Koseka Sans typeface are trademarks and copyrighted works of Koseka, all rights reserved, included only so the site can be built — see the [NOTICE](NOTICE) file, which also states the SIL Open Font License that applies to the current Koseka Sans font files.

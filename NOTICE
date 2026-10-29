@@ -1,0 +1,30 @@
+Koseka website
+Copyright 2026 Amon Rayfa
+
+This product is licensed under the Apache License, Version 2.0 (see LICENSE),
+with the following exclusions.
+
+BRAND ASSETS ARE NOT COVERED BY THE LICENSE
+
+The Koseka name, the Koseka logo mark (client/assets/logo/koseka-mark.svg,
+client/assets/icons/favicon.svg, phased-versioning/assets/favicon.svg, and the
+mark inlined in phased-versioning/index.html) and the Koseka wordmark are
+trademarks and copyrighted works of Koseka. All rights reserved. They are
+included in this repository only so that the website can be built and run; no
+license to reproduce, modify or use them is granted by the Apache License or
+otherwise, except to display the website as published.
+
+THE KOSEKA SANS FONT FILES
+
+The font files under client/assets/fonts/ and phased-versioning/assets/fonts/
+named koseka-sans-*.woff2 are the current generation of Koseka Sans, a
+derivative of Geist (Copyright 2024 The Geist Project Authors) and Inter
+(Copyright 2016 The Inter Project Authors). As required by their license they
+are distributed under the SIL Open Font License, Version 1.1
+(https://openfontlicense.org), with "Koseka Sans" as a Reserved Font Name: a
+modified version may not be distributed under that name. They are not covered
+by the Apache License. The name "Koseka Sans" and its use as Koseka's brand
+typeface remain subject to the trademark reservation above.
+
+geist.woff2 under phased-versioning/assets/fonts/ is Geist, SIL Open Font
+License 1.1, Copyright 2024 The Geist Project Authors.
