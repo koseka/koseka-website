@@ -13,7 +13,10 @@ pub(super) fn App() -> View {
                 p(id="wordmark", class="select-none mt-[0.14em] text-[1em] leading-none tracking-[-0.075em]") { "koseka" }
             }
 
-            p(id="tagline", class="select-none text-base text-black/60 dark:text-white/60") { "We are cooking." }
+            div(id="tagline", class="select-none flex flex-col gap-1 text-base") {
+                p(class="text-black/70 dark:text-white/70") { "We're cooking." }
+                p(class="text-black/40 dark:text-white/40") { "Come back later." }
+            }
 
             p(id="copyright", class="select-none fixed bottom-6 inset-x-0 text-xs text-black/40 dark:text-white/40") { "© 2026 Koseka" }
         }
