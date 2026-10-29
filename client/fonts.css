@@ -13,3 +13,17 @@
 	font-display: swap;
 	src: url("assets/fonts/koseka-sans-bold.woff2") format("woff2");
 }
+@font-face {
+	font-family: "Koseka Sans";
+	font-style: italic;
+	font-weight: 500;
+	font-display: swap;
+	src: url("assets/fonts/koseka-sans-medium-italic.woff2") format("woff2");
+}
+@font-face {
+	font-family: "Koseka Sans";
+	font-style: italic;
+	font-weight: 700;
+	font-display: swap;
+	src: url("assets/fonts/koseka-sans-bold-italic.woff2") format("woff2");
+}
