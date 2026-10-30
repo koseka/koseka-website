@@ -25,5 +25,6 @@ are included in this repository only so that the website can be built and run;
 no license to reproduce, modify, embed or use them is granted, except to
 display the website as published.
 
-geist.woff2 under phased-versioning/assets/fonts/ is Geist, SIL Open Font
-License 1.1, Copyright 2024 The Geist Project Authors.
+geist.woff2 and geist-mono.woff2 under phased-versioning/assets/fonts/ are
+Geist and Geist Mono, SIL Open Font License 1.1, Copyright 2024 The Geist
+Project Authors.

@@ -46,6 +46,13 @@
 				font-display: swap;
 				src: url("assets/fonts/geist.woff2") format("woff2");
 			}
+			@font-face {
+				font-family: "Geist Mono";
+				font-style: normal;
+				font-weight: 400;
+				font-display: swap;
+				src: url("assets/fonts/geist-mono.woff2") format("woff2");
+			}
 
 			:root {
 				--bg: #ffffff;
@@ -57,7 +64,7 @@
 				--text-strong: #000000;
 				--text-soft: #00000080;
 				--accent: #000000;
-				--mono: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+				--mono: "Geist Mono", ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
 			}
 			@media (prefers-color-scheme: dark) {
 				:root {
