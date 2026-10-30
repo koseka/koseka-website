@@ -8,8 +8,9 @@ BRAND ASSETS ARE NOT COVERED BY THE LICENSE
 
 The Koseka name, the Koseka logo mark (client/assets/logo/koseka-mark.svg,
 client/assets/icons/favicon.svg, phased-versioning/assets/favicon.svg, and the
-mark inlined in phased-versioning/index.html) and the Koseka wordmark are
-trademarks and copyrighted works of Koseka. All rights reserved. They are
+mark inlined in phased-versioning/index.html), the Koseka wordmark and the
+banner (img/koseka-banner.svg: the mark with the name set in Koseka Sans as
+outlines) are trademarks and copyrighted works of Koseka. All rights reserved. They are
 included in this repository only so that the website can be built and run; no
 license to reproduce, modify or use them is granted by the Apache License or
 otherwise, except to display the website as published.

@@ -1,5 +1,5 @@
 <p align="center">
-  <h1 align="center">Koseka Website</h1>
+  <a href="https://koseka.net"><img src="./img/koseka-banner.svg" alt="Koseka" width="480"></a>
   <p align="center">
     Contributions, corrections, and requests can be made through GitHub.
   </p>
